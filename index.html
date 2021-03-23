@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <title>Document</title>
+</head>
+<style>
+    /* body {
+        background-image: url('https://storage.googleapis.com/toyscenter-media/2019/03/ff8de8bb-hdg_lis46904_02.jpg');
+        background-position: center;
+    } */
+    body {
+        text-align: center;
+        overflow: hidden;
+        width: 100vw;
+        height: 100vh;
+        /* background-image: url('/'); */
+        /* background-size: cover; */
+        /* background-color: transparent /20%; */
+    }
+
+    img {
+
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        opacity: 0.4;
+        background-image: url('https://images.everyeye.it/img-notizie/la-matematica-reale-tratta-inventata-dall-uomo-v3-467060.jpg');
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: cover;
+        cursor: none;
+        pointer-events: none;
+    }
+
+    .main {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        /* justify-content: space-around; */
+    }
+
+    .container {
+        opacity: unset;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    #addizione {
+        position: relative;
+        font-size: 150px;
+        color: black;
+        z-index: 100;
+    }
+
+    .numero {
+        border: 1px solid;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 200px;
+        margin: 10px 10px;
+        color: white;
+        z-index: 100;
+    }
+
+    #titolo {
+        position: relative;
+        z-index: 200;
+        width: 100vw;
+        color: black;
+    }
+
+    #div {
+        justify-content: center;
+        z-index: 1000;
+        position: fixed;
+        color: white;
+        height: 60vh;
+        width: 90vw;
+        border-radius: 20px;
+        font-size: 150px;
+        z-index: 1000;
+        /* position: fixed !important; */
+        top: 20%;
+        margin-left: 5%;
+    }
+
+    .choice {
+        display: flex;
+        vertical-align: middle;
+        text-align: center;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #maschio {
+        vertical-align: middle;
+        font-size: 2rem;
+        background-color: lightblue;
+    }
+
+    #femmina {
+        font-size: 2rem;
+        background-color: lightpink;
+    }
+
+    #icona {
+        color: blue;
+        font-size: 10rem;
+        /* margin-top: 10%; */
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 16px;
+        }
+
+        #addizione {
+            font-size: 40px;
+        }
+
+        .numero {
+            border: 1px solid;
+            width: 120px;
+            height: 120px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 120px;
+            margin: 10px 10px;
+            color: white;
+            z-index: 100;
+        }
+
+        #titolo {
+            z-index: 200;
+            width: 100vw;
+            color: black;
+        }
+
+        #div {
+            justify-content: center;
+            z-index: 1000;
+            position: fixed;
+            color: white;
+            height: 60vh;
+            width: 90vw;
+            border-radius: 20px;
+            font-size: 16px;
+            z-index: 1000;
+            /* position: fixed !important; */
+            top: 20%;
+            margin-left: 5%;
+        }
+
+        #icona {
+            color: blue;
+            font-size: 5rem;
+            /* margin-top: 10%; */
+        }
+    }
+</style>
+
+<body>
+    <h1 id='titolo'>Matematica per bambini di Prima elementare</h1>
+    <div class="choice" id='choice'>
+
+        <div id='maschio' class="numero"><i class="fas fa-child" id=icona></i>Maschio</div>
+        <div class="numero" id="femmina"><i class="fas fa-child" id=icona style="color: rgb(255, 112, 136);"></i>Femmina
+        </div>
+    </div>
+    <div class="main" id='main' style="display: none;">
+        <!-- <img style="position: relative; width: 100vw;height: 100vh;"
+            src="https://storage.googleapis.com/toyscenter-media/2019/03/ff8de8bb-hdg_lis46904_02.jpg"> -->
+        <div id='addizione'></div>
+
+        <div class="container">
+            <!-- <div> -->
+            <div id='numero1' class="numero"></div>
+            <div class="numero" id="numero2"></div>
+            <!-- </div>
+            <div style="margin-top: 20px;"> -->
+            <div class="numero" id="numero3"></div>
+            <div class="numero" id="numero4"></div>
+            <!-- </div> -->
+        </div>
+    </div>
+    <img id=img>
+
+</body>
+<script>
+    let isPlaying = true
+    let isOpen = false
+    let div = document.createElement('div')
+    let button = document.createElement('button')
+    const popup = (message, color) => {
+        isOpen = !isOpen
+        if (isOpen) {
+            // let div = document.createElement('div')
+            div.setAttribute('id', 'div')
+            div.style.backgroundColor = color
+            div.innerHTML = message + '<br>'
+            button.textContent = 'Chiudi'
+            button.style.fontSize = '40px'
+            button.style.backgroundColor = 'lightblue'
+            button.style.borderRadius = '15px'
+            div.appendChild(button)
+            document.body.appendChild(div)
+        } else {
+            document.body.removeChild(div)
+        }
+        button.addEventListener('click', () => {
+            document.body.removeChild(div)
+            main()
+        })
+    }
+    const random_bg_color = () => {
+        var x = Math.floor(Math.random() * 256);
+        var y = Math.floor(Math.random() * 256);
+        var z = Math.floor(Math.random() * 256);
+        var bgColor = "rgb(" + x + "," + y + "," + z + ")";
+        return bgColor;
+    }
+
+    const main = () => {
+        // while (true) {
+        let a = Math.floor(Math.random() * 20) + 1;
+        let b = Math.floor(Math.random() * 20) + 1;
+        while (a < b) {
+            a = Math.floor(Math.random() * 20) + 1;
+            console.log(a)
+        }
+        let sol = [a + b, a - b]
+        const random1 = Math.floor(Math.random() * sol.length);
+
+        let solution = sol[random1]
+        console.log(solution)
+
+        let s = [Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 20) + 1]
+        document.getElementById('addizione').textContent = solution == sol[0] ? a + ' + ' + b : a + ' - ' + b
+        const random = Math.floor(Math.random() * s.length);
+        let x = s[random]
+        s[random] = solution
+        let b1 = document.getElementById('numero1')
+        let b2 = document.getElementById('numero2')
+        let b3 = document.getElementById('numero3')
+        let b4 = document.getElementById('numero4')
+        b1.style.backgroundColor = random_bg_color()
+        b2.style.backgroundColor = random_bg_color()
+        b3.style.backgroundColor = random_bg_color()
+        b4.style.backgroundColor = random_bg_color()
+        b1.textContent = s[1]
+        b2.textContent = s[2]
+        b3.textContent = s[3]
+        b4.textContent = s[0]
+        b1.addEventListener('click', () => {
+            if (b1.textContent == solution) {
+                popup('HAI VINTO', 'rgb(0,150,0)')
+            } else {
+                popup('HAI PERSO', 'rgb(255, 0, 0)')
+            }
+        })
+        b2.addEventListener('click', () => {
+            if (b2.textContent == solution) {
+                popup('HAI VINTO', 'rgb(0,150,0)')
+            } else {
+                popup('HAI PERSO', 'rgb(255, 0, 0)')
+            }
+        })
+        b3.addEventListener('click', () => {
+            if (b3.textContent == solution) {
+                popup('HAI VINTO', 'rgb(0,150,0)')
+            } else {
+                popup('HAI PERSO', 'rgb(255, 0, 0)')
+            }
+        })
+        b4.addEventListener('click', () => {
+            if (b4.textContent == solution) {
+                popup('HAI VINTO', 'rgb(0,150,0)')
+            } else {
+                popup('HAI PERSO', 'rgb(255, 0, 0)')
+            }
+        })
+    }
+
+    main()
+    document.getElementById('femmina').addEventListener('click', () => {
+        let img = document.getElementById('img')
+        img.style.backgroundImage = "url('https://storage.googleapis.com/toyscenter-media/2019/03/ff8de8bb-hdg_lis46904_02.jpg')"
+        document.getElementById('choice').style.display = 'none'
+        document.getElementById('main').style.display = 'block'
+    })
+    document.getElementById('maschio').addEventListener('click', () => {
+        let img = document.getElementById('img')
+        img.style.backgroundImage = "url('https://images.everyeye.it/img-articoli/toy-story-migliori-giocattoli-fortunata-saga-pixar-v8-48888.jpg')"
+        document.getElementById('choice').style.display = 'none'
+        document.getElementById('main').style.display = 'block'
+    })
+</script>
+
+</html>
